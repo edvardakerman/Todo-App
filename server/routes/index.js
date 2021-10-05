@@ -26,4 +26,10 @@ router.post('/api/todo', function (req, res, next) {
   res.json(lists);
 });
 
+// get one
+router.get('/api/todo/:id', function (req, res, next) {
+  var id = req.params.id - 1;
+  res.json(lists[id]);
+});
+
 module.exports = router;
