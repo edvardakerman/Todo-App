@@ -4,13 +4,13 @@ var router = express.Router();
 const Todolist = [
   {
     id: 1,
-    task: 'Köp mjölk',
-    content: 'Gå till ica och köp två liter mjölk'
+    title: 'Köp mjölk',
+    body: 'Gå till ica och köp två liter mjölk'
   },
   {
     id: 2,
-    task: 'Köp kanelbullar',
-    content: 'Gå till ica och köp kanelbullar'
+    title: 'Köp kanelbullar',
+    body: 'Gå till ica och köp kanelbullar'
   },
 ]
 
@@ -41,5 +41,19 @@ router.delete('/api/todo/:id', function (req, res, next) {
   Todolist.splice(removeIndex, 1);
   res.json(Todolist);
 });
+
+// update
+router.post('/api/todo/:id', function (req, res, next) {
+  const itemId = parseInt(req.params.id);
+  const item = Todolist.find((item) => {
+    return item.id === itemId
+  });
+
+  const updatedItem = req.body;
+  item.title = updatedItem.title;
+  item.body = updatedItem.body;
+
+  res.json(item);
+})
 
 module.exports = router;
