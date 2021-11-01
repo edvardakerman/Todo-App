@@ -50,7 +50,7 @@ export default function TodoList() {
             <thead>
               <tr>
                 <th>Task</th>
-                <th>Status</th>
+                <th>Description</th>
                 <th>Edit</th>
                 <th>Delete</th>
               </tr>
@@ -60,9 +60,11 @@ export default function TodoList() {
                 return (
                   <tr key={task.task_id}>
                     <td>{task.task_title}</td>
-                    <td>{task.task_status}</td>
+                    <td>{task.task_body}</td>
                     <td>
-                      <button>Edit</button>
+                      <a href={`/edit/${task.task_id}`}>
+                        <button>Edit</button>
+                      </a>
                     </td>
                     <td>
                       <button>Delete</button>
