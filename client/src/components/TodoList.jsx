@@ -1,4 +1,5 @@
 import { React, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default function TodoList() {
   const [tasks, setTasks] = useState(null);
@@ -62,9 +63,14 @@ export default function TodoList() {
                     <td>{task.task_title}</td>
                     <td>{task.task_body}</td>
                     <td>
-                      <a href={`/edit/${task.task_id}`}>
+                      <Link
+                        to={{
+                          pathname: `/edit/${task.task_id}`,
+                          state: task,
+                        }}
+                      >
                         <button>Edit</button>
-                      </a>
+                      </Link>
                     </td>
                     <td>
                       <button>Delete</button>
