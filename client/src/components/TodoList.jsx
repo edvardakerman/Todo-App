@@ -27,6 +27,25 @@ export default function TodoList() {
     });
   }, []);
 
+  const handleDelete = (itemId) => async (event) => {
+    const confirm = window.confirm(`Are you sure you want to delete`);
+    if (!confirm) return;
+    const url = `http://localhost:3000/api/todo/${itemId}`;
+    const obj = {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const response = await fetch(url, obj);
+
+    if (!response.ok) {
+      throw new Error("Something went wrong!");
+    }
+
+    setTasks((pp) => pp.filter((p) => p.task_id !== itemId));
+  };
+
   if (isLoading) {
     return (
       <section>
@@ -73,7 +92,9 @@ export default function TodoList() {
                       </Link>
                     </td>
                     <td>
-                      <button>Delete</button>
+                      <button onClick={handleDelete(task.task_id)}>
+                        Delete
+                      </button>
                     </td>
                   </tr>
                 );

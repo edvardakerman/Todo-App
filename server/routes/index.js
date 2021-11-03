@@ -6,13 +6,11 @@ let Todolist = [
     task_id: 1,
     task_title: "Köp mjölk",
     task_body: "Gå till ica och köp två liter mjölk",
-    task_status: "True",
   },
   {
     task_id: 2,
     task_title: "Köp kanelbullar",
     task_body: "Gå till ica och köp kanelbullar",
-    task_status: "false",
   },
 ];
 
@@ -23,6 +21,7 @@ router.get("/api/todo", function (req, res, next) {
 
 // post
 router.post("/api/todo", function (req, res, next) {
+  req.body.task_id = parseInt(req.body.task_id);
   Todolist.push(req.body);
   console.log("item created");
   res.json(Todolist);
