@@ -39,8 +39,14 @@ const CreateTodo = () => {
     <section>
       <form onSubmit={handleCreateTodo} onChange={changeHandler}>
         <h1>New Todo</h1>
-        <input label="Title:" id="task_title" type="text" />
-        <input label="Description:" id="task_body" type="text" />
+        <div>
+          <span>Title:</span>
+          <input label="Title:" id="task_title" type="text" />
+        </div>
+        <div>
+          <span>Description:</span>
+          <input label="Description:" id="task_body" type="text" />
+        </div>
         <input label="Id:" id="task_id" type="number" />
         <div>
           <button>Create</button>
