@@ -11,8 +11,6 @@ const CreateTodo = () => {
     setFormFields(payload);
   };
 
-  console.log(formFields);
-
   const changeHandler = (event) =>
     handleChange(event.target.value, event.target.id);
 

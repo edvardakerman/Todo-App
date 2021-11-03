@@ -66,6 +66,9 @@ export default function TodoList() {
       <section>
         <div>
           <h2>TodoList</h2>
+          <Link to={{ pathname: "/create" }}>
+            <button>Create New task</button>
+          </Link>
           <table>
             <thead>
               <tr>
