@@ -6,11 +6,13 @@ let Todolist = [
     task_id: 1,
     task_title: "Köp mjölk",
     task_body: "Gå till ica och köp två liter mjölk",
+    task_date: new Date(),
   },
   {
     task_id: 2,
     task_title: "Köp kanelbullar",
     task_body: "Gå till ica och köp kanelbullar",
+    task_date: new Date(),
   },
 ];
 
@@ -22,8 +24,10 @@ router.get("/api/todo", function (req, res, next) {
 // post
 router.post("/api/todo", function (req, res, next) {
   req.body.task_id = parseInt(req.body.task_id);
+  req.body.task_date = new Date();
   Todolist.push(req.body);
   console.log("item created");
+  console.log(Todolist);
   res.json(Todolist);
 });
 
@@ -55,6 +59,7 @@ router.post("/api/todo/:id", function (req, res, next) {
   const updatedItem = req.body;
   item.task_title = updatedItem.task_title;
   item.task_body = updatedItem.task_body;
+  item.task_date = new Date();
   console.log("item updated");
   res.json(item);
 });

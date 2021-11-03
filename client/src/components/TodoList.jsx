@@ -73,6 +73,7 @@ export default function TodoList() {
             <thead>
               <tr>
                 <th>Task</th>
+                <th>Date</th>
                 <th>Description</th>
                 <th>Edit</th>
                 <th>Delete</th>
@@ -80,9 +81,11 @@ export default function TodoList() {
             </thead>
             <tbody>
               {tasks.map((task) => {
+                const date = new Date(task.task_date);
                 return (
                   <tr key={task.task_id}>
                     <td>{task.task_title}</td>
+                    <td>{date.toDateString()}</td>
                     <td>{task.task_body}</td>
                     <td>
                       <Link
