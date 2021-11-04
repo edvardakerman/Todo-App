@@ -18,7 +18,7 @@ export default function TodoList() {
 
       const responseData = await response.json();
 
-      setTasks(responseData.data.todos);
+      setTasks(responseData.data.todos.reverse());
       setIsLoading(false);
     };
     fetchTasks().catch((error) => {
