@@ -3,6 +3,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var cors = require("cors");
 const mongoose = require("mongoose");
+require("dotenv").config();
 
 // var indexRouter = require("./routes/index");
 const todoRouter = require("./routes/todoRoutes");
@@ -16,8 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-const uri =
-  "mongodb+srv://new_user200:GqCR37Mh48sRM1sZ@cluster0.joovq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const uri = process.env.ATLAS_URI;
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 const { connection } = mongoose;
 connection.on("open", () => {
