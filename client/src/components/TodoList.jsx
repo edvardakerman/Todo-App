@@ -67,7 +67,7 @@ export default function TodoList() {
         <div>
           <h2>TodoList</h2>
           <Link to={{ pathname: "/create" }}>
-            <button>Create New task</button>
+            <button>Create New Todo</button>
           </Link>
           <table>
             <thead>
@@ -82,7 +82,6 @@ export default function TodoList() {
             <tbody>
               {tasks.map((task) => {
                 const date = new Date(task.datePlaced);
-                console.log(date);
                 return (
                   <tr key={task._id}>
                     <td>{task.title}</td>

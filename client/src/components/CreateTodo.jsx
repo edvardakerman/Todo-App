@@ -16,7 +16,7 @@ const CreateTodo = () => {
 
   const handleCreateTodo = async (event) => {
     event.preventDefault();
-    const url = "http://localhost:3000/api/todo";
+    const url = "http://localhost:5000/api/todos";
     const obj = {
       headers: {
         "Content-Type": "application/json",
@@ -38,16 +38,15 @@ const CreateTodo = () => {
   return (
     <section>
       <form onSubmit={handleCreateTodo} onChange={changeHandler}>
-        <h1>New Todo</h1>
+        <h1>Create Your New Todo</h1>
         <div>
           <span>Title:</span>
-          <input label="Title:" id="task_title" type="text" />
+          <input id="title" type="text" />
         </div>
         <div>
           <span>Description:</span>
-          <input label="Description:" id="task_body" type="text" />
+          <input id="description" type="text" />
         </div>
-        <input label="Id:" id="task_id" type="number" />
         <div>
           <button>Create</button>
           <button onClick={handleCancel}>Cancel</button>
