@@ -43,7 +43,7 @@ const readAllTodos = catchAsync(async (req, res, next) => {
 
 // READ get one todo by id
 const readOneTodo = catchAsync(async (req, res, next) => {
-  const todo = await Todo.findOne({ id: req.params.id });
+  const todo = await Todo.findOne({ _id: req.params.id });
   if (!todo) {
     return next(new AppError("No todo with that id found.", 404));
   }
@@ -56,9 +56,8 @@ const readOneTodo = catchAsync(async (req, res, next) => {
 });
 
 // UPDATE one todo by id
-// ADMIN ONLY
 const updateOneTodo = catchAsync(async (req, res, next) => {
-  const todo = await Todo.findOne({ id: req.params.id });
+  const todo = await Todo.findOne({ _id: req.params.id });
   if (!todo) {
     return next(new AppError("No todo with that id found.", 404));
   }
@@ -67,7 +66,7 @@ const updateOneTodo = catchAsync(async (req, res, next) => {
       new AppError("You need to provide both title and description.", 404)
     );
   }
-  const updatedTodo = await Todo.findOneAndUpdate({ id: todo.id }, req.body, {
+  const updatedTodo = await Todo.findOneAndUpdate({ _id: todo._id }, req.body, {
     new: true,
     runValidators: true,
   });
@@ -80,9 +79,8 @@ const updateOneTodo = catchAsync(async (req, res, next) => {
 });
 
 // DELETE one todo by id
-// ADMIN ONLY
 const deleteOneTodo = catchAsync(async (req, res, next) => {
-  const todo = await Todo.findOneAndDelete({ id: req.params.id });
+  const todo = await Todo.findOneAndDelete({ _id: req.params.id });
   if (!todo) {
     return next(new AppError("No todo with that id found.", 404));
   }
