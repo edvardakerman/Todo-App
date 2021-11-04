@@ -3,6 +3,7 @@ import { useHistory, useLocation } from "react-router-dom";
 
 const EditTodo = () => {
   const location = useLocation();
+  location.state.datePlaced = new Date();
   const [task, setTask] = useState(location.state);
   const history = useHistory();
 
@@ -12,7 +13,7 @@ const EditTodo = () => {
 
   const handleUpdateTodo = async (event) => {
     event.preventDefault();
-    const url = `http://localhost:3000/api/todo/${task.task_id}`;
+    const url = `http://localhost:5000/api/todos/${task._id}`;
     const obj = {
       headers: {
         "Content-Type": "application/json",
@@ -35,22 +36,26 @@ const EditTodo = () => {
     <section>
       <form onSubmit={handleUpdateTodo}>
         <h1>EDIT Todo</h1>
-        <input
-          onChange={getHandleChange("task_title")}
-          label="Title:"
-          name="task_title"
-          value={task.task_title}
-          id="task_title"
-          type="text"
-        />
-        <input
-          onChange={getHandleChange("task_body")}
-          label="Description:"
-          value={task.task_body}
-          name="task_body"
-          id="task_body"
-          type="text"
-        />
+        <div>
+          <span>Title: </span>
+          <input
+            onChange={getHandleChange("title")}
+            name="title"
+            value={task.title}
+            id="title"
+            type="text"
+          />
+        </div>
+        <div>
+          <span>Description: </span>
+          <input
+            onChange={getHandleChange("description")}
+            value={task.description}
+            name="description"
+            id="description"
+            type="text"
+          />
+        </div>
         <div>
           <button>Update</button>
           <button onClick={handleCancel}>Cancel</button>

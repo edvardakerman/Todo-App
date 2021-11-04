@@ -8,7 +8,7 @@ export default function TodoList() {
 
   useEffect(() => {
     const fetchTasks = async () => {
-      const url = "http://localhost:3000/api/todo";
+      const url = "http://localhost:5000/api/todos";
 
       const response = await fetch(url);
 
@@ -18,7 +18,7 @@ export default function TodoList() {
 
       const responseData = await response.json();
 
-      setTasks(responseData);
+      setTasks(responseData.data.todos);
       setIsLoading(false);
     };
     fetchTasks().catch((error) => {
@@ -30,7 +30,7 @@ export default function TodoList() {
   const handleDelete = (itemId) => async (event) => {
     const confirm = window.confirm(`Are you sure you want to delete`);
     if (!confirm) return;
-    const url = `http://localhost:3000/api/todo/${itemId}`;
+    const url = `http://localhost:5000/api/todos/${itemId}`;
     const obj = {
       method: "DELETE",
       headers: {
@@ -43,7 +43,7 @@ export default function TodoList() {
       throw new Error("Something went wrong!");
     }
 
-    setTasks((pp) => pp.filter((p) => p.task_id !== itemId));
+    setTasks((pp) => pp.filter((p) => p._id !== itemId));
   };
 
   if (isLoading) {
@@ -81,16 +81,17 @@ export default function TodoList() {
             </thead>
             <tbody>
               {tasks.map((task) => {
-                const date = new Date(task.task_date);
+                const date = new Date(task.datePlaced);
+                console.log(date);
                 return (
-                  <tr key={task.task_id}>
-                    <td>{task.task_title}</td>
+                  <tr key={task._id}>
+                    <td>{task.title}</td>
                     <td>{date.toDateString()}</td>
-                    <td>{task.task_body}</td>
+                    <td>{task.description}</td>
                     <td>
                       <Link
                         to={{
-                          pathname: `/edit/${task.task_id}`,
+                          pathname: `/edit/${task._id}`,
                           state: task,
                         }}
                       >
@@ -98,9 +99,7 @@ export default function TodoList() {
                       </Link>
                     </td>
                     <td>
-                      <button onClick={handleDelete(task.task_id)}>
-                        Delete
-                      </button>
+                      <button onClick={handleDelete(task._id)}>Delete</button>
                     </td>
                   </tr>
                 );
