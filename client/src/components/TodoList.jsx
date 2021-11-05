@@ -84,7 +84,9 @@ export default function TodoList() {
                 const date = new Date(task.datePlaced);
                 return (
                   <tr key={task._id}>
-                    <td>{task.title}</td>
+                    <td>
+                      <a href={`/todo/${task._id}`}>{task.title}</a>
+                    </td>
                     <td>{date.toDateString()}</td>
                     <td>{task.description}</td>
                     <td>
