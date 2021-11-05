@@ -1,11 +1,39 @@
-import React, { useState } from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 const EditTodo = () => {
-  const location = useLocation();
-  location.state.datePlaced = new Date();
-  const [task, setTask] = useState(location.state);
+  const [isLoading, setIsLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState();
+  const [task, setTask] = useState({
+    title: "Todo",
+    description: "Do this todo",
+  });
   const history = useHistory();
+
+  const todoId = window.location.href.split("/")[4];
+
+  useEffect(() => {
+    const fetchTodo = async () => {
+      const url = `http://localhost:5000/api/todos/${todoId}`;
+
+      const response = await fetch(url);
+
+      if (!response.ok) {
+        throw new Error("Something went wrong!");
+      }
+
+      const responseData = await response.json();
+
+      responseData.data.todo.datePlaced = new Date();
+
+      setTask(responseData.data.todo);
+      setIsLoading(false);
+    };
+    fetchTodo().catch((error) => {
+      setIsLoading(false);
+      setErrorMessage(error.message);
+    });
+  }, [todoId]);
 
   const getHandleChange = (key) => (event) => {
     setTask({ ...task, [key]: event.target.value });
@@ -31,6 +59,22 @@ const EditTodo = () => {
   const handleCancel = () => {
     history.push(`/`);
   };
+
+  if (isLoading) {
+    return (
+      <section>
+        <p>Loading...</p>
+      </section>
+    );
+  }
+
+  if (errorMessage) {
+    return (
+      <section>
+        <p>{errorMessage}</p>
+      </section>
+    );
+  }
 
   return (
     <section>
