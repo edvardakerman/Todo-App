@@ -45,7 +45,7 @@ const Todo = () => {
     );
   }
 
-  if (errorMessage) {
+  if (errorMessage || !todo) {
     return (
       <section>
         <p>{errorMessage}</p>
@@ -56,9 +56,8 @@ const Todo = () => {
     );
   }
 
-  const date = new Date(todo.datePlaced);
-
   if (todo) {
+    const date = new Date(todo.datePlaced);
     return (
       <div>
         <div>
