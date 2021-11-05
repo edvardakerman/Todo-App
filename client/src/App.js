@@ -5,10 +5,12 @@ import TodoList from "./components/TodoList";
 import CreateTodo from "./components/CreateTodo";
 import EditTodo from "./components/EditTodo";
 import Todo from "./components/Todo";
+import Header from "./components/Header";
 
 const App = () => {
   return (
     <div>
+      <Header />
       <Route exact path="/">
         <TodoList />
       </Route>

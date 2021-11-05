@@ -1,5 +1,6 @@
 import { React, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function TodoList() {
   const [tasks, setTasks] = useState(null);
@@ -65,48 +66,60 @@ export default function TodoList() {
     return (
       <section>
         <div>
-          <h2>TodoList</h2>
-          <Link to={{ pathname: "/create" }}>
-            <button>Create New Todo</button>
-          </Link>
-          <table>
-            <thead>
-              <tr>
-                <th>Task</th>
-                <th>Date</th>
-                <th>Description</th>
-                <th>Edit</th>
-                <th>Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-              {tasks.map((task) => {
-                const date = new Date(task.datePlaced);
-                return (
-                  <tr key={task._id}>
-                    <td>
-                      <a href={`/todo/${task._id}`}>{task.title}</a>
-                    </td>
-                    <td>{date.toDateString()}</td>
-                    <td>{task.description}</td>
-                    <td>
-                      <Link
-                        to={{
-                          pathname: `/edit/${task._id}`,
-                          state: task,
-                        }}
-                      >
-                        <button>Edit</button>
-                      </Link>
-                    </td>
-                    <td>
-                      <button onClick={handleDelete(task._id)}>Delete</button>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+          <div>
+            <div className="d-flex justify-content-center m-5">
+              <h2>TodoList</h2>
+            </div>
+            <div className="d-flex justify-content-center m-5">
+              <a href="/create">
+                <button className="btn btn-primary">Create New Todo</button>
+              </a>
+            </div>
+          </div>
+
+          <div className="d-flex justify-content-center">
+            <table className="table table-striped bg-primary table-hover w-auto">
+              <thead>
+                <tr>
+                  <th scope="col">Task</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Edit</th>
+                  <th scope="col">Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                {tasks.map((task) => {
+                  const date = new Date(task.datePlaced);
+                  return (
+                    <tr key={task._id}>
+                      <td>
+                        <a
+                          className="text-white font-weight-bold nounderline text-decoration-none"
+                          href={`/todo/${task._id}`}
+                        >
+                          <h3>{task.title}</h3>
+                        </a>
+                      </td>
+                      <td>{date.toDateString()}</td>
+                      <td>
+                        <a href={`/edit/${task._id}`}>
+                          <button className="btn btn-primary">Edit</button>
+                        </a>
+                      </td>
+                      <td>
+                        <button
+                          className="btn btn-danger"
+                          onClick={handleDelete(task._id)}
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
     );
