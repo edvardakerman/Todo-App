@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { BiArrowBack } from "react-icons/bi";
+import { MdLibraryAdd } from "react-icons/md";
 
 const CreateTodo = () => {
   const [formFields, setFormFields] = useState(null);
@@ -37,21 +39,49 @@ const CreateTodo = () => {
 
   return (
     <section>
-      <form onSubmit={handleCreateTodo} onChange={changeHandler}>
-        <h1>Create Your New Todo</h1>
-        <div>
-          <span>Title:</span>
-          <input id="title" type="text" />
+      <div>
+        <button className="btn m-3" onClick={handleCancel}>
+          <BiArrowBack color={"#2c3e50"} size={35} />
+        </button>
+      </div>
+      <div className="d-flex justify-content-center m-5">
+        <div className="card text-center" style={{ width: "30rem" }}>
+          <div
+            className="card-body rounded"
+            style={{
+              background: "#2980b9" /* fallback for old browsers */,
+              background:
+                "-webkit-linear-gradient(to left, #2c3e50, #2980b9)" /* Chrome 10-25, Safari 5.1-6 */,
+              background:
+                "linear-gradient(to left, #2c3e50, #2980b9)" /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */,
+            }}
+          >
+            <form onSubmit={handleCreateTodo} onChange={changeHandler}>
+              <div class="card-header text-white p-3">
+                <h1>Your New Todo</h1>
+              </div>
+              <div className="card-text m-5 text-dark">
+                <div className="text-white mt-3 rounded">
+                  <h5>Title</h5>
+                  <input className="rounded" id="title" type="text" />
+                </div>
+                <div className="text-white mt-4">
+                  <h6>Description</h6>
+                  <textarea className="rounded" id="description" type="text" />
+                </div>
+              </div>
+              <div>
+                <button className="btn mx-3" onClick={handleCancel}>
+                  <BiArrowBack color={"white"} size={25} />
+                </button>
+                <button className="btn mx-3">
+                  <MdLibraryAdd size={25} color={"white"} />
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-        <div>
-          <span>Description:</span>
-          <input id="description" type="text" />
-        </div>
-        <div>
-          <button>Create</button>
-          <button onClick={handleCancel}>Cancel</button>
-        </div>
-      </form>
+      </div>
     </section>
   );
 };

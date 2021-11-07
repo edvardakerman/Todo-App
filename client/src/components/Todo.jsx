@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import { FiDelete } from "react-icons/fi";
+import { AiTwotoneEdit } from "react-icons/ai";
+import { IoCheckmarkSharp } from "react-icons/io5";
+import { BiArrowBack } from "react-icons/bi";
 
 const Todo = () => {
   const [todo, setTodo] = useState(null);
@@ -78,29 +82,59 @@ const Todo = () => {
   if (todo) {
     const date = new Date(todo.datePlaced);
     return (
-      <div className="d-flex justify-content-center m-5">
-        <div className="card bg-primary text-center" style={{ width: "28rem" }}>
-          <div className="card-body">
-            <h2 className="card-title">{todo.title}</h2>
-            <h6 className="card-subtitle mb-2 text-white">
-              {date.toDateString()}
-            </h6>
-            <p className="card-text">{todo.description}</p>
-            <button className="btn btn-dark m-2" onClick={handleGoBack}>
-              Go Back
-            </button>
-            <a href={`/edit/${todo._id}`}>
-              <button className="btn btn-light m-2">Edit</button>
-            </a>
-            <button
-              className="btn btn-danger m-2"
-              onClick={handleDelete(todo._id)}
+      <section>
+        <div>
+          <button className="btn btn-light m-3" onClick={handleGoBack}>
+            <BiArrowBack color={"#2c3e50"} size={35} />
+          </button>
+        </div>
+
+        <div className="d-flex justify-content-center m-5">
+          <div className="card text-center" style={{ width: "30rem" }}>
+            <div
+              style={{
+                background: "#2980b9" /* fallback for old browsers */,
+                background:
+                  "-webkit-linear-gradient(to left, #2c3e50, #2980b9)" /* Chrome 10-25, Safari 5.1-6 */,
+                background:
+                  "linear-gradient(to left, #2c3e50, #2980b9)" /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */,
+              }}
+              className="card-body rounded"
             >
-              Delete
-            </button>
+              <div class="card-header p-3">
+                <h2
+                  style={{
+                    color: "#2980b9",
+                  }}
+                  className="card-title text-white"
+                >
+                  {todo.title}
+                </h2>
+                <h6 className="card-subtitle text-white">
+                  {date.toDateString()}
+                </h6>
+              </div>
+              <p className="card-text m-5 text-white">{todo.description}</p>
+              <div>
+                <button className="btn mx-3" onClick={handleGoBack}>
+                  <BiArrowBack color={"white"} size={25} />
+                </button>
+                <button className="btn mx-3" onClick={handleDelete(todo._id)}>
+                  <IoCheckmarkSharp color={"white"} size={25} />
+                </button>
+                <a href={`/edit/${todo._id}`}>
+                  <button className="btn mx-3">
+                    <AiTwotoneEdit color={"white"} size={25} />
+                  </button>
+                </a>
+                <button className="btn mx-3" onClick={handleDelete(todo._id)}>
+                  <FiDelete color={"white"} size={25} />
+                </button>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
     );
   }
 };

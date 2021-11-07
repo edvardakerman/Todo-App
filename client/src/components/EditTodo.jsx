@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import { BiArrowBack } from "react-icons/bi";
+import { MdLibraryAdd } from "react-icons/md";
 
 const EditTodo = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -76,36 +78,73 @@ const EditTodo = () => {
     );
   }
 
-  return (
-    <section>
-      <form onSubmit={handleUpdateTodo}>
-        <h1>EDIT Todo</h1>
+  if (task) {
+    const date = new Date(task.datePlaced);
+    return (
+      <section>
         <div>
-          <span>Title: </span>
-          <input
-            onChange={getHandleChange("title")}
-            name="title"
-            value={task.title}
-            id="title"
-            type="text"
-          />
+          <button className="btn btn-light m-3" onClick={handleCancel}>
+            <BiArrowBack color={"#2c3e50"} size={35} />
+          </button>
         </div>
-        <div>
-          <span>Description: </span>
-          <input
-            onChange={getHandleChange("description")}
-            value={task.description}
-            name="description"
-            id="description"
-            type="text"
-          />
+
+        <div className="d-flex justify-content-center m-5">
+          <div className="card text-center" style={{ width: "30rem" }}>
+            <div
+              className="card-body rounded"
+              style={{
+                background: "#2980b9" /* fallback for old browsers */,
+                background:
+                  "-webkit-linear-gradient(to left, #2c3e50, #2980b9)" /* Chrome 10-25, Safari 5.1-6 */,
+                background:
+                  "linear-gradient(to left, #2c3e50, #2980b9)" /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */,
+              }}
+            >
+              <form onSubmit={handleUpdateTodo}>
+                <div className="card-header text-white">
+                  <h1>Edit Your Todo</h1>
+                  <h6 className="card-subtitle text-white">
+                    {date.toDateString()}
+                  </h6>
+                </div>
+                <div className="card-text m-5 text-dark">
+                  <div className="text-white mt-3 rounded">
+                    <h5>Title</h5>
+                    <input
+                      className="rounded"
+                      onChange={getHandleChange("title")}
+                      name="title"
+                      value={task.title}
+                      id="title"
+                      type="text"
+                    />
+                  </div>
+                  <div className="text-white mt-4 rounded">
+                    <h6>Description</h6>
+                    <textarea
+                      className="rounded"
+                      onChange={getHandleChange("description")}
+                      value={task.description}
+                      name="description"
+                      id="description"
+                      type="text"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <button className="btn mx-3" onClick={handleCancel}>
+                    <BiArrowBack color={"white"} size={25} />
+                  </button>
+                  <button className="btn mx-3">
+                    <MdLibraryAdd size={25} color={"white"} />
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
-        <div>
-          <button>Update</button>
-          <button onClick={handleCancel}>Cancel</button>
-        </div>
-      </form>
-    </section>
-  );
+      </section>
+    );
+  }
 };
 export default EditTodo;
