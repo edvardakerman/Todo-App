@@ -17,7 +17,7 @@ const App = () => {
     const fetchUser = async () => {
       if (localStorage.getItem("tkn")) {
         const token = localStorage.getItem("tkn");
-        const url = `${process.env.REACT_APP_BASE_URL}/api/users/getMe`;
+        const url = `http://localhost:5000/api/users/getMe`;
         const obj = {
           headers: {
             authorization: `Bearer ${token}`,

@@ -1,7 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import { MdLibraryAdd, MdChecklist } from "react-icons/md";
+import { UserContext } from "../contexts/UserContext";
+import { useHistory, useLocation } from "react-router-dom";
 
 const Header = () => {
+  const { user, setUser } = useContext(UserContext);
+  const history = useHistory();
+
+  console.log(user);
+
+  const handleLogout = () => {
+    localStorage.removeItem("tkn");
+    setUser(null);
+    history.push("/");
+  };
+
   return (
     <nav
       style={{
@@ -24,9 +37,17 @@ const Header = () => {
                 <MdLibraryAdd size={20} /> New Todo
               </button>
             </a>
-            <a href="/login" className="nav-item nav-link text-white mx-5">
-              Login / Register
-            </a>
+
+            {user ? (
+              <div>
+                <p>{user.fullName}</p>
+                <button onClick={handleLogout}>Logout</button>
+              </div>
+            ) : (
+              <a href={`/login`} className="nav-item nav-link text-white mx-5">
+                Login
+              </a>
+            )}
           </div>
         </div>
       </div>
