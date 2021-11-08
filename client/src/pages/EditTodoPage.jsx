@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
 import { MdLibraryAdd } from "react-icons/md";
 
-const EditTodo = () => {
+const EditTodoPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState();
   const [task, setTask] = useState({
@@ -147,4 +147,4 @@ const EditTodo = () => {
     );
   }
 };
-export default EditTodo;
+export default EditTodoPage;

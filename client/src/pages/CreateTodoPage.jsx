@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
 import { MdLibraryAdd } from "react-icons/md";
 
-const CreateTodo = () => {
+const CreateTodoPage = () => {
   const [formFields, setFormFields] = useState(null);
   const history = useHistory();
 
@@ -85,4 +85,4 @@ const CreateTodo = () => {
     </section>
   );
 };
-export default CreateTodo;
+export default CreateTodoPage;

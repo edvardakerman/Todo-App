@@ -1,27 +1,27 @@
 import React from "react";
 import { Route } from "react-router-dom";
 
-import TodoList from "./components/TodoList";
-import CreateTodo from "./components/CreateTodo";
-import EditTodo from "./components/EditTodo";
-import Todo from "./components/Todo";
 import Header from "./components/Header";
+import TodoListPage from "./pages/TodoListPage";
+import TodoDetailPage from "./pages/TodoDetailPage";
+import CreateTodoPage from "./pages/CreateTodoPage";
+import EditTodoPage from "./pages/EditTodoPage";
 
 const App = () => {
   return (
     <div>
       <Header />
       <Route exact path="/">
-        <TodoList />
+        <TodoListPage />
       </Route>
       <Route exact path="/Create">
-        <CreateTodo />
+        <CreateTodoPage />
       </Route>
       <Route exact path="/Edit/:id">
-        <EditTodo />
+        <EditTodoPage />
       </Route>
       <Route exact path="/Todo/:id">
-        <Todo />
+        <TodoDetailPage />
       </Route>
     </div>
   );

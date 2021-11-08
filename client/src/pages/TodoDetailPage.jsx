@@ -5,7 +5,7 @@ import { AiTwotoneEdit } from "react-icons/ai";
 import { IoCheckmarkSharp } from "react-icons/io5";
 import { BiArrowBack } from "react-icons/bi";
 
-const Todo = () => {
+const TodoDetailPage = () => {
   const [todo, setTodo] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState();
@@ -139,4 +139,4 @@ const Todo = () => {
   }
 };
 
-export default Todo;
+export default TodoDetailPage;
