@@ -101,7 +101,7 @@ const TodoDetailPage = () => {
               }}
               className="card-body rounded"
             >
-              <div class="card-header p-3">
+              <div className="card-header p-3">
                 <h2
                   style={{
                     color: "#2980b9",

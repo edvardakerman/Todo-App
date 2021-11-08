@@ -73,12 +73,12 @@ export default function TodoListPage() {
             <h2>Welcome, This is your TodoList</h2>
           </div>
         </div>
-        <div class="row row-cols-1 row-cols-md-3 m-5">
+        <div className="row row-cols-1 row-cols-md-3 m-5">
           {todos.map((todo) => {
             const date = new Date(todo.datePlaced);
             return (
-              <div class="col mb-4">
-                <div class="card  text-center h-100">
+              <div key={todo._id} className="col mb-4">
+                <div className="card text-center h-100">
                   <div
                     style={{
                       background: "#2980b9" /* fallback for old browsers */,
@@ -87,13 +87,13 @@ export default function TodoListPage() {
                       background:
                         "linear-gradient(to left, #2c3e50, #2980b9)" /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */,
                     }}
-                    class="card-body rounded"
+                    className="card-body rounded"
                   >
                     <a
                       className="nounderline text-decoration-none"
                       href={`/todo/${todo._id}`}
                     >
-                      <div class="card-header p-3">
+                      <div className="card-header p-3">
                         <h2
                           style={{
                             color: "#2980b9",

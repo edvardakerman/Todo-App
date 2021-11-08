@@ -7,6 +7,7 @@ require("dotenv").config();
 
 // var indexRouter = require("./routes/index");
 const todoRouter = require("./routes/todoRoutes");
+const usersRouter = require("./routes/userRoutes");
 
 var app = express();
 const port = process.env.PORT || 5000;
@@ -27,6 +28,7 @@ connection.on("error", (err) => {
   console.log(`Error connecting to MongoDB: ${err}`);
 });
 
+app.use("/api/users", usersRouter);
 app.use("/api/todos", todoRouter);
 // app.use("/", indexRouter);
 

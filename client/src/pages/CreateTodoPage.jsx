@@ -57,7 +57,7 @@ const CreateTodoPage = () => {
             }}
           >
             <form onSubmit={handleCreateTodo} onChange={changeHandler}>
-              <div class="card-header text-white p-3">
+              <div className="card-header text-white p-3">
                 <h1>Your New Todo</h1>
               </div>
               <div className="card-text m-5 text-dark">
