@@ -17,15 +17,7 @@ const Header = () => {
         <a href="/" class="navbar-brand text-white mx-5">
           TODO <MdChecklist size={30} color={"white"} />
         </a>
-        <button
-          type="button"
-          class="navbar-toggler"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarCollapse"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="">
           <div class="navbar-nav ms-auto">
             <a href="/create">
               <button className="btn ml-1 btn-success mx-5">
