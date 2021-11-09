@@ -12,8 +12,16 @@ export default function TodoListPage() {
   useEffect(() => {
     const fetchTodos = async () => {
       const url = "http://localhost:5000/api/todos";
+      const token = localStorage.getItem("tkn");
 
-      const response = await fetch(url);
+      const obj = {
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
+        },
+      };
+
+      const response = await fetch(url, obj);
 
       if (!response.ok) {
         throw new Error("Something went wrong!");
@@ -34,10 +42,12 @@ export default function TodoListPage() {
     const confirm = window.confirm(`Are you sure you want to delete`);
     if (!confirm) return;
     const url = `http://localhost:5000/api/todos/${itemId}`;
+    const token = localStorage.getItem("tkn");
     const obj = {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
       },
     };
     const response = await fetch(url, obj);
@@ -81,11 +91,7 @@ export default function TodoListPage() {
                 <div className="card text-center h-100">
                   <div
                     style={{
-                      background: "#2980b9" /* fallback for old browsers */,
-                      background:
-                        "-webkit-linear-gradient(to left, #2c3e50, #2980b9)" /* Chrome 10-25, Safari 5.1-6 */,
-                      background:
-                        "linear-gradient(to left, #2c3e50, #2980b9)" /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */,
+                      background: "linear-gradient(to left, #2c3e50, #2980b9)",
                     }}
                     className="card-body rounded"
                   >

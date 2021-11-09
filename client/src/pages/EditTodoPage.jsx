@@ -17,8 +17,16 @@ const EditTodoPage = () => {
   useEffect(() => {
     const fetchTodo = async () => {
       const url = `http://localhost:5000/api/todos/${todoId}`;
+      const token = localStorage.getItem("tkn");
 
-      const response = await fetch(url);
+      const obj = {
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
+        },
+      };
+
+      const response = await fetch(url, obj);
 
       if (!response.ok) {
         throw new Error("Something went wrong!");
@@ -44,9 +52,11 @@ const EditTodoPage = () => {
   const handleUpdateTodo = async (event) => {
     event.preventDefault();
     const url = `http://localhost:5000/api/todos/${task._id}`;
+    const token = localStorage.getItem("tkn");
     const obj = {
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
       },
       method: "POST",
       body: JSON.stringify(task),
@@ -93,11 +103,7 @@ const EditTodoPage = () => {
             <div
               className="card-body rounded"
               style={{
-                background: "#2980b9" /* fallback for old browsers */,
-                background:
-                  "-webkit-linear-gradient(to left, #2c3e50, #2980b9)" /* Chrome 10-25, Safari 5.1-6 */,
-                background:
-                  "linear-gradient(to left, #2c3e50, #2980b9)" /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */,
+                background: "linear-gradient(to left, #2c3e50, #2980b9)",
               }}
             >
               <form onSubmit={handleUpdateTodo}>

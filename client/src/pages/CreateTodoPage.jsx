@@ -4,8 +4,8 @@ import { BiArrowBack } from "react-icons/bi";
 import { MdLibraryAdd } from "react-icons/md";
 
 const CreateTodoPage = () => {
-  const [formFields, setFormFields] = useState(null);
   const history = useHistory();
+  const [formFields, setFormFields] = useState(null);
 
   const handleChange = (value, fieldId) => {
     const payload = { ...formFields };
@@ -19,9 +19,11 @@ const CreateTodoPage = () => {
   const handleCreateTodo = async (event) => {
     event.preventDefault();
     const url = "http://localhost:5000/api/todos";
+    const token = localStorage.getItem("tkn");
     const obj = {
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
       },
       method: "POST",
       body: JSON.stringify(formFields),
@@ -49,11 +51,7 @@ const CreateTodoPage = () => {
           <div
             className="card-body rounded"
             style={{
-              background: "#2980b9" /* fallback for old browsers */,
-              background:
-                "-webkit-linear-gradient(to left, #2c3e50, #2980b9)" /* Chrome 10-25, Safari 5.1-6 */,
-              background:
-                "linear-gradient(to left, #2c3e50, #2980b9)" /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */,
+              background: "linear-gradient(to left, #2c3e50, #2980b9)",
             }}
           >
             <form onSubmit={handleCreateTodo} onChange={changeHandler}>
