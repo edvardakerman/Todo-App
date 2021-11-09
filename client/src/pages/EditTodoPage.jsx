@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { BiArrowBack } from "react-icons/bi";
 import { MdLibraryAdd } from "react-icons/md";
-import { UserContext } from "../contexts/UserContext";
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const EditTodoPage = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -12,7 +11,6 @@ const EditTodoPage = () => {
     description: "Do this todo",
   });
   const history = useHistory();
-  const { user } = useContext(UserContext);
 
   const todoId = window.location.href.split("/")[4];
 
@@ -85,13 +83,19 @@ const EditTodoPage = () => {
   if (errorMessage) {
     return (
       <section>
-        <p>{errorMessage}</p>
+        <button className="btn mx-3" onClick={handleCancel}>
+          <BiArrowBack color={"#2c3e50"} size={25} />
+        </button>
+        <div className="d-flex justify-content-center mt-5">
+          <p>{errorMessage}</p>
+        </div>
+        <div className="d-flex justify-content-center">
+          <button className="btn mx-3" onClick={handleCancel}>
+            <BiArrowBack color={"#2c3e50"} size={25} />
+          </button>
+        </div>
       </section>
     );
-  }
-
-  if (!user) {
-    return <Redirect to="/login" />;
   }
 
   if (task) {
@@ -157,8 +161,12 @@ const EditTodoPage = () => {
         </div>
       </section>
     );
-  } else {
-    return <Redirect to="/login" />;
   }
+
+  return (
+    <section>
+      <p>"Something went wrong!"</p>
+    </section>
+  );
 };
 export default EditTodoPage;

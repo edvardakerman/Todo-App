@@ -4,7 +4,6 @@ import { FiDelete } from "react-icons/fi";
 import { AiTwotoneEdit } from "react-icons/ai";
 import { IoCheckmarkSharp } from "react-icons/io5";
 import { BiArrowBack } from "react-icons/bi";
-import { Redirect } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 
 const TodoDetailPage = () => {
@@ -81,19 +80,25 @@ const TodoDetailPage = () => {
     );
   }
 
-  if (errorMessage) {
+  if (errorMessage || !user) {
     return (
-      <section>
-        <p>{errorMessage}</p>
-        <div>
-          <button onClick={handleGoBack}>Go Back</button>
+      <div>
+        <div className="d-flex justify-content-center border-1 mt-5 border-bottom">
+          <h2>Welcome, this is your todo app</h2>
         </div>
-      </section>
+        <div className="d-flex justify-content-center m-5">
+          <p>Please login or register to continue</p>
+        </div>
+        <div className="d-flex justify-content-center">
+          <a href="/login">
+            <button className="btn btn-primary mx-5">Login</button>
+          </a>
+          <a href="/register">
+            <button className="btn btn-dark mx-5">Register</button>
+          </a>
+        </div>
+      </div>
     );
-  }
-
-  if (!user) {
-    return <Redirect to="/login" />;
   }
 
   if (todo) {
@@ -150,6 +155,12 @@ const TodoDetailPage = () => {
       </section>
     );
   }
+
+  return (
+    <section>
+      <p>"Something went wrong! Create"</p>
+    </section>
+  );
 };
 
 export default TodoDetailPage;
