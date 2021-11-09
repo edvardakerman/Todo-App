@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
 import { MdLibraryAdd } from "react-icons/md";
+import { UserContext } from "../contexts/UserContext";
+import { Redirect } from "react-router-dom";
 
 const CreateTodoPage = () => {
   const history = useHistory();
   const [formFields, setFormFields] = useState(null);
+  const { user } = useContext(UserContext);
 
   const handleChange = (value, fieldId) => {
     const payload = { ...formFields };
@@ -72,8 +75,8 @@ const CreateTodoPage = () => {
                 <button className="btn mx-3" onClick={handleCancel}>
                   <BiArrowBack color={"white"} size={25} />
                 </button>
-                <button className="btn mx-3">
-                  <MdLibraryAdd size={25} color={"white"} />
+                <button className="btn btn-success mx-3">
+                  <MdLibraryAdd size={25} color={"white"} /> Create
                 </button>
               </div>
             </form>
@@ -83,4 +86,5 @@ const CreateTodoPage = () => {
     </section>
   );
 };
+
 export default CreateTodoPage;

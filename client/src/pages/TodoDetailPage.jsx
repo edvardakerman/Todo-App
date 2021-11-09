@@ -1,15 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { FiDelete } from "react-icons/fi";
 import { AiTwotoneEdit } from "react-icons/ai";
 import { IoCheckmarkSharp } from "react-icons/io5";
 import { BiArrowBack } from "react-icons/bi";
+import { Redirect } from "react-router-dom";
+import { UserContext } from "../contexts/UserContext";
 
 const TodoDetailPage = () => {
   const [todo, setTodo] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState();
   const history = useHistory();
+  const { user } = useContext(UserContext);
 
   const todoId = window.location.href.split("/")[4];
 
@@ -78,7 +81,7 @@ const TodoDetailPage = () => {
     );
   }
 
-  if (errorMessage || !todo) {
+  if (errorMessage) {
     return (
       <section>
         <p>{errorMessage}</p>
@@ -89,7 +92,9 @@ const TodoDetailPage = () => {
     );
   }
 
-  console.log(todo);
+  if (!user) {
+    return <Redirect to="/login" />;
+  }
 
   if (todo) {
     const date = new Date(todo.datePlaced);

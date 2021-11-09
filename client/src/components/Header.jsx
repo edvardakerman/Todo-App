@@ -35,7 +35,12 @@ const Header = () => {
             {user ? (
               <div>
                 <p>{user.fullName}</p>
-                <button onClick={handleLogout}>Logout</button>
+                <button
+                  className="btn btn-dark text-white"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </button>
               </div>
             ) : (
               <a href={`/login`} className="nav-item nav-link text-white mx-5">

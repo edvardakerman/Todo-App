@@ -24,6 +24,11 @@ const todoSchema = new mongoose.Schema({
     type: Date,
     default: new Date(),
   },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "user",
+    required: [true, "An order must have an id of customer."],
+  },
 });
 
 // DOCUMENT MIDDLEWARE: runs before .save() and .create()

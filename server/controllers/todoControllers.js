@@ -5,6 +5,7 @@ const AppError = require("../utils/AppError");
 //CRUD operations
 //CREATE one todo
 const createOneTodo = catchAsync(async (req, res, next) => {
+  const userId = req.user._id;
   if (!req.body.title || !req.body.description) {
     return next(
       new AppError("You need to provide both title and description", 401)
@@ -15,6 +16,7 @@ const createOneTodo = catchAsync(async (req, res, next) => {
   const todo = {
     title,
     description,
+    userId,
   };
 
   const newTodo = await Todo.create(todo);
@@ -28,7 +30,8 @@ const createOneTodo = catchAsync(async (req, res, next) => {
 
 // READ get all todos
 const readAllTodos = catchAsync(async (req, res, next) => {
-  const todos = await Todo.find({});
+  const userId = req.user._id;
+  const todos = await Todo.find({ userId: userId });
   if (!todos) {
     return next(new AppError("No todos found.", 404));
   }
@@ -43,7 +46,8 @@ const readAllTodos = catchAsync(async (req, res, next) => {
 
 // READ get one todo by id
 const readOneTodo = catchAsync(async (req, res, next) => {
-  const todo = await Todo.findOne({ _id: req.params.id });
+  const userId = req.user._id;
+  const todo = await Todo.findOne({ _id: req.params.id, userId: userId });
   if (!todo) {
     return next(new AppError("No todo with that id found.", 404));
   }
@@ -57,7 +61,8 @@ const readOneTodo = catchAsync(async (req, res, next) => {
 
 // UPDATE one todo by id
 const updateOneTodo = catchAsync(async (req, res, next) => {
-  const todo = await Todo.findOne({ _id: req.params.id });
+  const userId = req.user._id;
+  const todo = await Todo.findOne({ _id: req.params.id, userId: userId });
   if (!todo) {
     return next(new AppError("No todo with that id found.", 404));
   }
@@ -66,10 +71,14 @@ const updateOneTodo = catchAsync(async (req, res, next) => {
       new AppError("You need to provide both title and description.", 404)
     );
   }
-  const updatedTodo = await Todo.findOneAndUpdate({ _id: todo._id }, req.body, {
-    new: true,
-    runValidators: true,
-  });
+  const updatedTodo = await Todo.findOneAndUpdate(
+    { _id: todo._id, userId: userId },
+    req.body,
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
   res.status(200).json({
     status: "success",
     data: {
@@ -80,7 +89,11 @@ const updateOneTodo = catchAsync(async (req, res, next) => {
 
 // DELETE one todo by id
 const deleteOneTodo = catchAsync(async (req, res, next) => {
-  const todo = await Todo.findOneAndDelete({ _id: req.params.id });
+  const userId = req.user._id;
+  const todo = await Todo.findOneAndDelete({
+    _id: req.params.id,
+    userId: userId,
+  });
   if (!todo) {
     return next(new AppError("No todo with that id found.", 404));
   }

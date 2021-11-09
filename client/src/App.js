@@ -47,12 +47,6 @@ const App = () => {
           <Route exact path="/">
             <TodoListPage />
           </Route>
-          <Route exact path="/Register">
-            <RegisterPage />
-          </Route>
-          <Route exact path="/Login">
-            <LoginPage />
-          </Route>
           <Route exact path="/Create">
             <CreateTodoPage />
           </Route>
@@ -61,6 +55,12 @@ const App = () => {
           </Route>
           <Route exact path="/Todo/:id">
             <TodoDetailPage />
+          </Route>
+          <Route exact path="/Login">
+            <LoginPage />
+          </Route>
+          <Route exact path="/Register">
+            <RegisterPage />
           </Route>
         </Switch>
       </UserContext.Provider>

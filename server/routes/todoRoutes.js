@@ -1,4 +1,5 @@
 const express = require("express");
+const { protect, restrictToUser } = require("../controllers/authControllers");
 
 const {
   createOneTodo,
@@ -10,14 +11,14 @@ const {
 
 const router = express.Router();
 
-router.post("/", createOneTodo);
+router.post("/", protect, restrictToUser, createOneTodo);
 
-router.get("/", readAllTodos);
+router.get("/", protect, restrictToUser, readAllTodos);
 
-router.get("/:id", readOneTodo);
+router.get("/:id", protect, restrictToUser, readOneTodo);
 
-router.post("/:id", updateOneTodo);
+router.post("/:id", protect, restrictToUser, updateOneTodo);
 
-router.delete("/:id", deleteOneTodo);
+router.delete("/:id", protect, restrictToUser, deleteOneTodo);
 
 module.exports = router;

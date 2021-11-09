@@ -1,13 +1,17 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useContext } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FiDelete } from "react-icons/fi";
 import { AiTwotoneEdit } from "react-icons/ai";
 import { IoCheckmarkSharp } from "react-icons/io5";
+import { UserContext } from "../contexts/UserContext";
+import { MdLibraryAdd } from "react-icons/md";
+import { Redirect } from "react-router-dom";
 
 export default function TodoListPage() {
   const [todos, setTodos] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState();
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
     const fetchTodos = async () => {
@@ -75,7 +79,31 @@ export default function TodoListPage() {
     );
   }
 
-  if (todos) {
+  if (!user) {
+    return <Redirect to="/login" />;
+  }
+
+  if (todos.length === 0) {
+    return (
+      <div>
+        <div className="d-flex justify-content-center border-1 mt-5 border-bottom">
+          <h2>Welcome, This is your TodoList</h2>
+        </div>
+        <div className="d-flex justify-content-center m-5">
+          <p>Your Todo List is Empty</p>
+        </div>
+        <div className="d-flex justify-content-center">
+          <a href="/create">
+            <button className="btn btn-success">
+              <MdLibraryAdd size={20} /> New Todo
+            </button>
+          </a>
+        </div>
+      </div>
+    );
+  }
+
+  if (user && todos) {
     return (
       <div>
         <div className="">

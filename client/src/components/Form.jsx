@@ -52,82 +52,143 @@ export default function Form({ type, title }) {
   if (type === "signup") {
     return (
       <section>
-        <form onSubmit={handleSubmit} className="" action="">
-          <h1 className="">{title}</h1>
-          <div>
-            <label htmlFor="fullName">Fullname*</label>
-            <input
-              onChange={(e) => handleChange(e.target.value, e.target.id)}
-              id="fullName"
-              type="text"
-            />
+        <div className="d-flex justify-content-center m-5">
+          <div className="card text-center" style={{ width: "30rem" }}>
+            <div
+              className="card-body rounded"
+              style={{
+                background: "linear-gradient(to left, #2c3e50, #2980b9)",
+              }}
+            >
+              <form onSubmit={handleSubmit} className="" action="">
+                <div className="card-header text-white p-3">
+                  <h1>{title}</h1>
+                </div>
+                <div className="card-text m-5 text-dark">
+                  <div className="text-white mt-3 rounded">
+                    <h5>Name</h5>
+                    <input
+                      className="rounded"
+                      onChange={(e) =>
+                        handleChange(e.target.value, e.target.id)
+                      }
+                      id="fullName"
+                      type="text"
+                    />
+                  </div>
+                  <div className="text-white mt-4">
+                    <h5>Email</h5>
+                    <input
+                      className="rounded"
+                      onChange={(e) =>
+                        handleChange(e.target.value, e.target.id)
+                      }
+                      id="email"
+                      type="email"
+                      autoComplete="email"
+                    />
+                  </div>
+                  <div className="text-white mt-4">
+                    <h6>Password</h6>
+                    <input
+                      className="rounded"
+                      onChange={(e) =>
+                        handleChange(e.target.value, e.target.id)
+                      }
+                      id="password"
+                      type="password"
+                      autoComplete="new-password"
+                    />
+                  </div>
+                  <div className="text-white mt-4">
+                    <h6>Confirm Password</h6>
+                    <input
+                      className="rounded"
+                      onChange={(e) =>
+                        handleChange(e.target.value, e.target.id)
+                      }
+                      id="passwordConfirm"
+                      type="password"
+                      autoComplete="new-password"
+                    />
+                  </div>
+                </div>
+
+                <div className="mb-2">
+                  <button className="btn btn-dark rounded mx-4">
+                    Register
+                  </button>
+                  <Link to="/login">
+                    <button className="btn btn-primary rounded mx-4">
+                      Login
+                    </button>
+                  </Link>
+                </div>
+                {submitStatus && <p>{submitStatus.message}</p>}
+              </form>
+            </div>
           </div>
-          <div>
-            <label htmlFor="email">Email*</label>
-            <input
-              onChange={(e) => handleChange(e.target.value, e.target.id)}
-              id="email"
-              type="email"
-              autoComplete="email"
-            />
-          </div>
-          <div>
-            <label htmlFor="password">Password*</label>
-            <input
-              onChange={(e) => handleChange(e.target.value, e.target.id)}
-              id="password"
-              type="password"
-              autoComplete="new-password"
-            />
-          </div>
-          <div>
-            <label htmlFor="passwordConfirm">Confirm Password*</label>
-            <input
-              onChange={(e) => handleChange(e.target.value, e.target.id)}
-              id="passwordConfirm"
-              type="password"
-              autoComplete="new-password"
-            />
-          </div>
-          <div>
-            {/* Byt ut nedantående mot Button components */}
-            <button>Sign Up</button>
-            <Link to="/login">Login</Link>
-          </div>
-          {submitStatus && <p>{submitStatus.message}</p>}
-        </form>
+        </div>
       </section>
     );
   } else if (type === "login") {
     return (
       <section>
-        <form onSubmit={handleSubmit} action="">
-          <h1>{title}</h1>
-          <div>
-            <label htmlFor="email">Email*</label>
-            <input
-              onChange={(e) => handleChange(e.target.value, e.target.id)}
-              id="email"
-              type="email"
-              autoComplete="email"
-            />
+        <div className="d-flex justify-content-center m-5">
+          <div className="card text-center" style={{ width: "30rem" }}>
+            <div
+              className="card-body rounded"
+              style={{
+                background: "linear-gradient(to left, #2c3e50, #2980b9)",
+              }}
+            >
+              <form onSubmit={handleSubmit} action="">
+                <div className="card-header text-white p-3">
+                  <h1>{title}</h1>
+                </div>
+                <div className="card-text m-5 text-dark">
+                  <div className="text-white mt-3 rounded">
+                    <h5>Email</h5>
+                    <input
+                      className="rounded"
+                      onChange={(e) =>
+                        handleChange(e.target.value, e.target.id)
+                      }
+                      id="email"
+                      type="email"
+                      autoComplete="email"
+                    />
+                  </div>
+                  <div className="text-white mt-4">
+                    <h6>Password</h6>
+                    <input
+                      className="rounded"
+                      onChange={(e) =>
+                        handleChange(e.target.value, e.target.id)
+                      }
+                      id="password"
+                      type="password"
+                      autoComplete="password"
+                    />
+                  </div>
+                </div>
+
+                <div className="mb-2">
+                  {/* Byt ut nedantående mot Button components */}
+                  <button className="btn btn-primary rounded mx-4">
+                    Login
+                  </button>
+                  <Link to="/register">
+                    <button className="btn btn-dark rounded mx-4">
+                      Register
+                    </button>
+                  </Link>
+                </div>
+                {submitStatus && <p>{submitStatus.message}</p>}
+              </form>
+            </div>
           </div>
-          <div>
-            <label htmlFor="password">Password*</label>
-            <input
-              onChange={(e) => handleChange(e.target.value, e.target.id)}
-              id="password"
-              type="password"
-              autoComplete="password"
-            />
-          </div>
-          <div>
-            {/* Byt ut nedantående mot Button components */}
-            <button>Login</button>
-            <Link to="/register">Register</Link>
-          </div>
-          {submitStatus && <p>{submitStatus.message}</p>}
-        </form>
+        </div>
       </section>
     );
   }

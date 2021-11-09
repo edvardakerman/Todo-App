@@ -33,8 +33,8 @@ const protect = catchAsync(async (req, res, next) => {
 });
 
 // Must have protect before it in stack
-const restrictToAdmin = catchAsync(async (req, res, next) => {
-  if (!req.user.adminUser) {
+const restrictToUser = catchAsync(async (req, res, next) => {
+  if (!req.user) {
     return next(
       new AppError("You do not have permission to perform this action.", 403)
     );
@@ -42,4 +42,4 @@ const restrictToAdmin = catchAsync(async (req, res, next) => {
   next();
 });
 
-module.exports = { protect, restrictToAdmin };
+module.exports = { protect, restrictToUser };
