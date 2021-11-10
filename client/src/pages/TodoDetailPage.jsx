@@ -16,8 +16,16 @@ const TodoDetailPage = () => {
   useEffect(() => {
     const fetchTodo = async () => {
       const url = `http://localhost:5000/api/todos/${todoId}`;
+      const token = localStorage.getItem("tkn");
 
-      const response = await fetch(url);
+      const obj = {
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
+        },
+      };
+
+      const response = await fetch(url, obj);
 
       if (!response.ok) {
         throw new Error("Something went wrong!");
@@ -35,13 +43,13 @@ const TodoDetailPage = () => {
   }, [todoId]);
 
   const handleDelete = (itemId) => async (event) => {
-    const confirm = window.confirm(`Are you sure you want to delete`);
-    if (!confirm) return;
     const url = `http://localhost:5000/api/todos/${itemId}`;
+    const token = localStorage.getItem("tkn");
     const obj = {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
       },
     };
     const response = await fetch(url, obj);
@@ -57,6 +65,10 @@ const TodoDetailPage = () => {
     history.push(`/`);
   };
 
+  const capitalize = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
   if (isLoading) {
     return (
       <section>
@@ -68,12 +80,16 @@ const TodoDetailPage = () => {
     );
   }
 
-  if (errorMessage || !todo) {
+  if (errorMessage) {
     return (
       <section>
-        <p>{errorMessage}</p>
         <div>
-          <button onClick={handleGoBack}>Go Back</button>
+          <button className="btn btn-light m-3" onClick={handleGoBack}>
+            <BiArrowBack color={"#2c3e50"} size={35} />
+          </button>
+        </div>
+        <div className="d-flex justify-content-center m-2">
+          <p>{errorMessage}</p>
         </div>
       </section>
     );
@@ -89,45 +105,33 @@ const TodoDetailPage = () => {
           </button>
         </div>
 
-        <div className="d-flex justify-content-center m-5">
+        <div className="d-flex justify-content-center my-5">
           <div className="card text-center" style={{ width: "30rem" }}>
-            <div
-              style={{
-                background: "#2980b9" /* fallback for old browsers */,
-                background:
-                  "-webkit-linear-gradient(to left, #2c3e50, #2980b9)" /* Chrome 10-25, Safari 5.1-6 */,
-                background:
-                  "linear-gradient(to left, #2c3e50, #2980b9)" /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */,
-              }}
-              className="card-body rounded"
-            >
-              <div class="card-header p-3">
-                <h2
-                  style={{
-                    color: "#2980b9",
-                  }}
-                  className="card-title text-white"
-                >
-                  {todo.title}
+            <div className="card-body bg-color rounded">
+              <div className="card-header">
+                <h2 className="card-title text-white">
+                  {capitalize(todo.title)}
                 </h2>
-                <h6 className="card-subtitle text-white">
+                <h6 className="card-subtitle my-2 text-white">
                   {date.toDateString()}
                 </h6>
               </div>
-              <p className="card-text m-5 text-white">{todo.description}</p>
+              <p className="card-text my-5 text-white todo-text">
+                {capitalize(todo.description)}
+              </p>
               <div>
-                <button className="btn mx-3" onClick={handleGoBack}>
+                <button className="btn m-3" onClick={handleGoBack}>
                   <BiArrowBack color={"white"} size={25} />
                 </button>
-                <button className="btn mx-3" onClick={handleDelete(todo._id)}>
+                <button className="btn m-3" onClick={handleDelete(todo._id)}>
                   <IoCheckmarkSharp color={"white"} size={25} />
                 </button>
                 <a href={`/edit/${todo._id}`}>
-                  <button className="btn mx-3">
+                  <button className="btn m-3">
                     <AiTwotoneEdit color={"white"} size={25} />
                   </button>
                 </a>
-                <button className="btn mx-3" onClick={handleDelete(todo._id)}>
+                <button className="btn m-3" onClick={handleDelete(todo._id)}>
                   <FiDelete color={"white"} size={25} />
                 </button>
               </div>
@@ -137,6 +141,12 @@ const TodoDetailPage = () => {
       </section>
     );
   }
+
+  return (
+    <section>
+      <p>"Something went wrong! Create"</p>
+    </section>
+  );
 };
 
 export default TodoDetailPage;

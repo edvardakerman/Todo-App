@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
 import { MdLibraryAdd } from "react-icons/md";
+import { useHistory } from "react-router-dom";
 
 const EditTodoPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState();
-  const [task, setTask] = useState({
+  const [todo, setTodo] = useState({
     title: "Todo",
     description: "Do this todo",
   });
@@ -17,8 +17,16 @@ const EditTodoPage = () => {
   useEffect(() => {
     const fetchTodo = async () => {
       const url = `http://localhost:5000/api/todos/${todoId}`;
+      const token = localStorage.getItem("tkn");
 
-      const response = await fetch(url);
+      const obj = {
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
+        },
+      };
+
+      const response = await fetch(url, obj);
 
       if (!response.ok) {
         throw new Error("Something went wrong!");
@@ -28,7 +36,7 @@ const EditTodoPage = () => {
 
       responseData.data.todo.datePlaced = new Date();
 
-      setTask(responseData.data.todo);
+      setTodo(responseData.data.todo);
       setIsLoading(false);
     };
     fetchTodo().catch((error) => {
@@ -38,18 +46,20 @@ const EditTodoPage = () => {
   }, [todoId]);
 
   const getHandleChange = (key) => (event) => {
-    setTask({ ...task, [key]: event.target.value });
+    setTodo({ ...todo, [key]: event.target.value });
   };
 
   const handleUpdateTodo = async (event) => {
     event.preventDefault();
-    const url = `http://localhost:5000/api/todos/${task._id}`;
+    const url = `http://localhost:5000/api/todos/${todo._id}`;
+    const token = localStorage.getItem("tkn");
     const obj = {
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
       },
       method: "POST",
-      body: JSON.stringify(task),
+      body: JSON.stringify(todo),
     };
     const response = await fetch(url, obj);
     if (!response.ok) {
@@ -73,13 +83,20 @@ const EditTodoPage = () => {
   if (errorMessage) {
     return (
       <section>
-        <p>{errorMessage}</p>
+        <div>
+          <button className="btn btn-light m-3" onClick={handleCancel}>
+            <BiArrowBack color={"#2c3e50"} size={35} />
+          </button>
+        </div>
+        <div className="d-flex justify-content-center m-2">
+          <p>{errorMessage}</p>
+        </div>
       </section>
     );
   }
 
-  if (task) {
-    const date = new Date(task.datePlaced);
+  if (todo) {
+    const date = new Date(todo.datePlaced);
     return (
       <section>
         <div>
@@ -88,46 +105,40 @@ const EditTodoPage = () => {
           </button>
         </div>
 
-        <div className="d-flex justify-content-center m-5">
+        <div className="d-flex justify-content-center my-5">
           <div className="card text-center" style={{ width: "30rem" }}>
-            <div
-              className="card-body rounded"
-              style={{
-                background: "#2980b9" /* fallback for old browsers */,
-                background:
-                  "-webkit-linear-gradient(to left, #2c3e50, #2980b9)" /* Chrome 10-25, Safari 5.1-6 */,
-                background:
-                  "linear-gradient(to left, #2c3e50, #2980b9)" /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */,
-              }}
-            >
+            <div className="card-body rounded bg-color">
               <form onSubmit={handleUpdateTodo}>
                 <div className="card-header text-white">
                   <h1>Edit Your Todo</h1>
-                  <h6 className="card-subtitle text-white">
+                  <h6 className="card-subtitle text-white my-2">
                     {date.toDateString()}
                   </h6>
                 </div>
-                <div className="card-text m-5 text-dark">
-                  <div className="text-white mt-3 rounded">
-                    <h5>Title</h5>
+                <div className="card-text my-5">
+                  <div className="text-white mt-3">
                     <input
-                      className="rounded"
+                      required="required"
                       onChange={getHandleChange("title")}
                       name="title"
-                      value={task.title}
+                      value={todo.title}
                       id="title"
                       type="text"
+                      maxLength="40"
+                      minLength="2"
                     />
                   </div>
-                  <div className="text-white mt-4 rounded">
-                    <h6>Description</h6>
+                  <div className="mt-4 rounded">
                     <textarea
-                      className="rounded"
+                      required="required"
+                      className="rounded mt-4"
                       onChange={getHandleChange("description")}
-                      value={task.description}
+                      value={todo.description}
                       name="description"
                       id="description"
                       type="text"
+                      maxLength="1024"
+                      minLength="2"
                     />
                   </div>
                 </div>
@@ -146,5 +157,11 @@ const EditTodoPage = () => {
       </section>
     );
   }
+
+  return (
+    <section>
+      <p>"Something went wrong!"</p>
+    </section>
+  );
 };
 export default EditTodoPage;

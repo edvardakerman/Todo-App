@@ -6,7 +6,7 @@ const todoSchema = new mongoose.Schema({
     required: [true, "A todo must have a title"],
     trim: true,
     maxlength: [40, "A todo name must have less or equal then 40 characters"],
-    minlength: [5, "A todo name must have more or equal then 5 characters"],
+    minlength: [2, "A todo name must have more or equal then 2 characters"],
   },
   description: {
     type: String,
@@ -16,13 +16,18 @@ const todoSchema = new mongoose.Schema({
       "A todo description must have less or equal then 1024 characters",
     ],
     minlength: [
-      15,
+      2,
       "A todo description must have more or equal then 15 characters",
     ],
   },
   datePlaced: {
     type: Date,
     default: new Date(),
+  },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "user",
+    required: [true, "An order must have an id of customer."],
   },
 });
 

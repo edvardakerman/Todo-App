@@ -1,38 +1,91 @@
-.App {
-  text-align: center;
+.bg-color {
+  background: linear-gradient(to left, #2c3e50, #2980b9);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.bg-color-lightblue {
+  background: #2980b9;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.bg-color-darkblue {
+  background: #2c3e50;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.bg-color-reverse {
+  background: linear-gradient(to left, #2980b9, #2c3e50);
+}
+
+.todo-text {
+  text-decoration: underline;
+}
+
+#description {
+  border-bottom: 3px solid white;
+  text-align: justify;
+  border: none;
+  outline: 0;
+  color: #2980b9;
+  font-size: 18px;
+  width: 80%;
+}
+
+#description::placeholder {
+  color: #2980b9;
+}
+
+#title {
+  background: transparent;
+  border: none;
+  outline: 0;
+  border-width: 0 0 2px;
+  border-bottom: 3px solid white;
+  color: white;
+  font-size: 20px;
+  width: 80%;
+}
+
+#title::placeholder {
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+#email,
+#password,
+#fullName,
+#passwordConfirm {
+  background: transparent;
+  border: none;
+  outline: 0;
+  border-width: 0 0 2px;
+  border-bottom: 3px solid white;
+  color: white;
+  font-size: 18px;
+  width: 60%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#email::placeholder {
+  color: white;
+}
+
+#fullName::placeholder {
+  color: white;
+}
+
+#passwordConfirm::placeholder {
+  color: white;
+}
+
+#password::placeholder {
+  color: white;
+}
+
+.form-input {
+  background: transparent;
+  border: none;
+  outline: 0;
+  border-width: 0 0 2px;
+  border-bottom: 3px solid white;
+  color: white;
+}
+
+.form-input::placeholder {
+  color: white;
 }
