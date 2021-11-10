@@ -13,15 +13,14 @@ const Header = () => {
     history.push("/");
   };
 
+  const capitalize = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
   return (
-    <nav
-      style={{
-        background: "linear-gradient(to left, #2980b9, #2c3e50)",
-      }}
-      className="navbar navbar-expand-lg navbar-light bg-light"
-    >
+    <nav className="navbar bg-color-reverse navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid my-2">
-        <a href="/" className="navbar-brand text-white mx-5">
+        <a href="/" className="navbar-brand text-white my-3 mx-5">
           TODO <MdChecklist size={30} color={"white"} />
         </a>
         <div className="">
@@ -29,15 +28,15 @@ const Header = () => {
             {user ? (
               <div className="navbar-nav">
                 <a className="" href="/create">
-                  <button className="btn mx-5 my-2 btn-success text-center">
+                  <button className="btn mx-5 my-3 btn-success text-center">
                     <MdLibraryAdd size={20} /> New Todo
                   </button>
                 </a>
-                <p className="navbar-nav my-3 text-center mx-5">
-                  {user.fullName}
+                <p className="navbar-nav my-4 text-center mx-5">
+                  {capitalize(user.fullName)}
                 </p>
                 <button
-                  className="btn btn-dark my-2 text-white mx-5"
+                  className="btn btn-dark my-3 text-white mx-5"
                   onClick={handleLogout}
                 >
                   Logout
@@ -45,7 +44,7 @@ const Header = () => {
               </div>
             ) : (
               <div className="navbar-nav">
-                <button className="btn btn-primary my-2 text-white mx-5">
+                <button className="btn btn-primary my-3 text-white mx-5">
                   <a
                     className="nounderline text-decoration-none text-white"
                     href="/login"
@@ -53,7 +52,7 @@ const Header = () => {
                     Login
                   </a>
                 </button>
-                <button className="btn btn-dark my-2 text-white mx-5">
+                <button className="btn btn-dark my-3 text-white mx-5">
                   <a
                     className="nounderline text-decoration-none text-white"
                     href="/register"

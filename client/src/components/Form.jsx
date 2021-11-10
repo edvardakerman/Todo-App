@@ -52,23 +52,19 @@ export default function Form({ type, title }) {
   if (type === "signup") {
     return (
       <section>
-        <div className="d-flex justify-content-center m-5">
+        <div className="d-flex justify-content-center my-5">
           <div className="card text-center" style={{ width: "30rem" }}>
-            <div
-              className="card-body rounded"
-              style={{
-                background: "linear-gradient(to left, #2c3e50, #2980b9)",
-              }}
-            >
+            <div className="card-body rounded bg-color">
               <form onSubmit={handleSubmit} className="" action="">
                 <div className="card-header text-white p-3">
                   <h1>{title}</h1>
                 </div>
-                <div className="card-text m-5 text-dark">
+                <div className="card-text my-5">
                   <div className="text-white mt-3 rounded">
                     <h5>Name</h5>
                     <input
-                      className="rounded"
+                      placeholder="John Doe"
+                      className=""
                       onChange={(e) =>
                         handleChange(e.target.value, e.target.id)
                       }
@@ -79,7 +75,8 @@ export default function Form({ type, title }) {
                   <div className="text-white mt-4">
                     <h5>Email</h5>
                     <input
-                      className="rounded"
+                      placeholder="JohnDoe@mail.com"
+                      className=""
                       onChange={(e) =>
                         handleChange(e.target.value, e.target.id)
                       }
@@ -91,7 +88,8 @@ export default function Form({ type, title }) {
                   <div className="text-white mt-4">
                     <h6>Password</h6>
                     <input
-                      className="rounded"
+                      placeholder="********"
+                      className=""
                       onChange={(e) =>
                         handleChange(e.target.value, e.target.id)
                       }
@@ -103,7 +101,8 @@ export default function Form({ type, title }) {
                   <div className="text-white mt-4">
                     <h6>Confirm Password</h6>
                     <input
-                      className="rounded"
+                      placeholder="********"
+                      className=""
                       onChange={(e) =>
                         handleChange(e.target.value, e.target.id)
                       }
@@ -115,11 +114,11 @@ export default function Form({ type, title }) {
                 </div>
 
                 <div className="mb-2">
-                  <button className="btn btn-dark rounded mx-4">
+                  <button className="btn btn-dark rounded my-2 mx-4">
                     Register
                   </button>
                   <Link to="/login">
-                    <button className="btn btn-primary rounded mx-4">
+                    <button className="btn btn-primary rounded my-2 mx-4">
                       Login
                     </button>
                   </Link>
@@ -134,23 +133,18 @@ export default function Form({ type, title }) {
   } else if (type === "login") {
     return (
       <section>
-        <div className="d-flex justify-content-center m-5">
+        <div className="d-flex justify-content-center my-5">
           <div className="card text-center" style={{ width: "30rem" }}>
-            <div
-              className="card-body rounded"
-              style={{
-                background: "linear-gradient(to left, #2c3e50, #2980b9)",
-              }}
-            >
+            <div className="card-body rounded bg-color">
               <form onSubmit={handleSubmit} action="">
                 <div className="card-header text-white p-3">
                   <h1>{title}</h1>
                 </div>
-                <div className="card-text m-5 text-dark">
-                  <div className="text-white mt-3 rounded">
+                <div className="card-text my-5 text-dark">
+                  <div className="text-white my-5">
                     <h5>Email</h5>
                     <input
-                      className="rounded"
+                      placeholder="johndoe@mail.com"
                       onChange={(e) =>
                         handleChange(e.target.value, e.target.id)
                       }
@@ -159,10 +153,10 @@ export default function Form({ type, title }) {
                       autoComplete="email"
                     />
                   </div>
-                  <div className="text-white mt-4">
-                    <h6>Password</h6>
+                  <div className="text-white my-5">
+                    <h5>Password</h5>
                     <input
-                      className="rounded"
+                      placeholder="********"
                       onChange={(e) =>
                         handleChange(e.target.value, e.target.id)
                       }
@@ -173,13 +167,13 @@ export default function Form({ type, title }) {
                   </div>
                 </div>
 
-                <div className="mb-2">
+                <div className="my-2">
                   {/* Byt ut nedantående mot Button components */}
-                  <button className="btn btn-primary rounded mx-4">
+                  <button className="btn btn-primary rounded my-2 mx-4">
                     Login
                   </button>
                   <Link to="/register">
-                    <button className="btn btn-dark rounded mx-4">
+                    <button className="btn btn-dark rounded my-2 mx-4">
                       Register
                     </button>
                   </Link>

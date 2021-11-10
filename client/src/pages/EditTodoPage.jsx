@@ -108,26 +108,20 @@ const EditTodoPage = () => {
           </button>
         </div>
 
-        <div className="d-flex justify-content-center m-5">
+        <div className="d-flex justify-content-center my-5">
           <div className="card text-center" style={{ width: "30rem" }}>
-            <div
-              className="card-body rounded"
-              style={{
-                background: "linear-gradient(to left, #2c3e50, #2980b9)",
-              }}
-            >
+            <div className="card-body rounded bg-color">
               <form onSubmit={handleUpdateTodo}>
                 <div className="card-header text-white">
                   <h1>Edit Your Todo</h1>
-                  <h6 className="card-subtitle text-white">
+                  <h6 className="card-subtitle text-white my-2">
                     {date.toDateString()}
                   </h6>
                 </div>
-                <div className="card-text m-5 text-dark">
-                  <div className="text-white mt-3 rounded">
-                    <h5>Title</h5>
+                <div className="card-text my-5">
+                  <div className="text-white mt-3">
                     <input
-                      className="rounded"
+                      className=""
                       onChange={getHandleChange("title")}
                       name="title"
                       value={task.title}
@@ -135,10 +129,9 @@ const EditTodoPage = () => {
                       type="text"
                     />
                   </div>
-                  <div className="text-white mt-4 rounded">
-                    <h6>Description</h6>
+                  <div className="mt-4 rounded">
                     <textarea
-                      className="rounded"
+                      className="rounded mt-4"
                       onChange={getHandleChange("description")}
                       value={task.description}
                       name="description"

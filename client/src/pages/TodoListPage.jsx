@@ -61,6 +61,10 @@ export default function TodoListPage() {
     setTodos((pp) => pp.filter((p) => p._id !== itemId));
   };
 
+  const capitalize = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
   if (isLoading) {
     return (
       <section>
@@ -75,7 +79,7 @@ export default function TodoListPage() {
         <div className="d-flex justify-content-center border-1 mt-5 border-bottom">
           <h2>Welcome, this is your todo app</h2>
         </div>
-        <div className="d-flex justify-content-center m-5">
+        <div className="d-flex justify-content-center">
           <p>Please login or register to continue</p>
         </div>
         <div className="d-flex justify-content-center">
@@ -98,30 +102,20 @@ export default function TodoListPage() {
             <h2>Welcome, this is your Todo list</h2>
           </div>
         </div>
-        <div className="row row-cols-1 row-cols-md-3 m-5">
+        <div className="row row-cols-1 row-cols-md-3 mx-2 my-4">
           {todos.map((todo) => {
             const date = new Date(todo.datePlaced);
             return (
               <div key={todo._id} className="col mb-4">
                 <div className="card text-center h-100">
-                  <div
-                    style={{
-                      background: "linear-gradient(to left, #2c3e50, #2980b9)",
-                    }}
-                    className="card-body rounded"
-                  >
+                  <div className="card-body bg-color rounded">
                     <a
                       className="nounderline text-decoration-none"
                       href={`/todo/${todo._id}`}
                     >
                       <div className="card-header p-3">
-                        <h2
-                          style={{
-                            color: "#2980b9",
-                          }}
-                          className="card-title text-white"
-                        >
-                          {todo.title}
+                        <h2 className="card-title text-white">
+                          {capitalize(todo.title)}
                         </h2>
                         <h6 className="card-subtitle mt-1 text-white">
                           {date.toDateString()}

@@ -69,6 +69,10 @@ const TodoDetailPage = () => {
     history.push(`/`);
   };
 
+  const capitalize = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
   if (isLoading) {
     return (
       <section>
@@ -91,10 +95,10 @@ const TodoDetailPage = () => {
         </div>
         <div className="d-flex justify-content-center">
           <a href="/login">
-            <button className="btn btn-primary mx-5">Login</button>
+            <button className="btn btn-primary mx-4">Login</button>
           </a>
           <a href="/register">
-            <button className="btn btn-dark mx-5">Register</button>
+            <button className="btn btn-dark mx-4">Register</button>
           </a>
         </div>
       </div>
@@ -111,41 +115,33 @@ const TodoDetailPage = () => {
           </button>
         </div>
 
-        <div className="d-flex justify-content-center m-5">
+        <div className="d-flex justify-content-center my-5">
           <div className="card text-center" style={{ width: "30rem" }}>
-            <div
-              style={{
-                background: "linear-gradient(to left, #2c3e50, #2980b9)",
-              }}
-              className="card-body rounded"
-            >
-              <div className="card-header p-3">
-                <h2
-                  style={{
-                    color: "#2980b9",
-                  }}
-                  className="card-title text-white"
-                >
-                  {todo.title}
+            <div className="card-body bg-color rounded">
+              <div className="card-header">
+                <h2 className="card-title text-white">
+                  {capitalize(todo.title)}
                 </h2>
-                <h6 className="card-subtitle text-white">
+                <h6 className="card-subtitle my-2 text-white">
                   {date.toDateString()}
                 </h6>
               </div>
-              <p className="card-text m-5 text-white">{todo.description}</p>
+              <p className="card-text my-5 text-white todo-text">
+                {capitalize(todo.description)}
+              </p>
               <div>
-                <button className="btn mx-3" onClick={handleGoBack}>
+                <button className="btn m-3" onClick={handleGoBack}>
                   <BiArrowBack color={"white"} size={25} />
                 </button>
-                <button className="btn mx-3" onClick={handleDelete(todo._id)}>
+                <button className="btn m-3" onClick={handleDelete(todo._id)}>
                   <IoCheckmarkSharp color={"white"} size={25} />
                 </button>
                 <a href={`/edit/${todo._id}`}>
-                  <button className="btn mx-3">
+                  <button className="btn m-3">
                     <AiTwotoneEdit color={"white"} size={25} />
                   </button>
                 </a>
-                <button className="btn mx-3" onClick={handleDelete(todo._id)}>
+                <button className="btn m-3" onClick={handleDelete(todo._id)}>
                   <FiDelete color={"white"} size={25} />
                 </button>
               </div>

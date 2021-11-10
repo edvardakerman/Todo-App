@@ -49,26 +49,21 @@ const CreateTodoPage = () => {
             <BiArrowBack color={"#2c3e50"} size={35} />
           </button>
         </div>
-        <div className="d-flex justify-content-center m-5">
+        <div className="d-flex justify-content-center my-5">
           <div className="card text-center" style={{ width: "30rem" }}>
-            <div
-              className="card-body rounded"
-              style={{
-                background: "linear-gradient(to left, #2c3e50, #2980b9)",
-              }}
-            >
+            <div className="card-body rounded bg-color">
               <form onSubmit={handleCreateTodo} onChange={changeHandler}>
                 <div className="card-header text-white p-3">
                   <h1>Your New Todo</h1>
                 </div>
-                <div className="card-text m-5 text-dark">
-                  <div className="text-white mt-3 rounded">
-                    <h5>Title</h5>
-                    <input className="rounded" id="title" type="text" />
+                <div className="card-text my-5">
+                  <div className="">
+                    <input placeholder="Title..." id="title" type="text" />
                   </div>
-                  <div className="text-white mt-4">
-                    <h6>Description</h6>
+                  <div className="my-5">
                     <textarea
+                      aria-label=""
+                      placeholder="Description..."
                       className="rounded"
                       id="description"
                       type="text"
@@ -101,10 +96,10 @@ const CreateTodoPage = () => {
       </div>
       <div className="d-flex justify-content-center">
         <a href="/login">
-          <button className="btn btn-primary mx-5">Login</button>
+          <button className="btn btn-primary mx-4">Login</button>
         </a>
         <a href="/register">
-          <button className="btn btn-dark mx-5">Register</button>
+          <button className="btn btn-dark mx-4">Register</button>
         </a>
       </div>
     </div>
