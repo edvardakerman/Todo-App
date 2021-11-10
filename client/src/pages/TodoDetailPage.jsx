@@ -1,17 +1,15 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { FiDelete } from "react-icons/fi";
 import { AiTwotoneEdit } from "react-icons/ai";
 import { IoCheckmarkSharp } from "react-icons/io5";
 import { BiArrowBack } from "react-icons/bi";
-import { UserContext } from "../contexts/UserContext";
 
 const TodoDetailPage = () => {
   const [todo, setTodo] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState();
   const history = useHistory();
-  const { user } = useContext(UserContext);
 
   const todoId = window.location.href.split("/")[4];
 
@@ -45,8 +43,6 @@ const TodoDetailPage = () => {
   }, [todoId]);
 
   const handleDelete = (itemId) => async (event) => {
-    const confirm = window.confirm(`Are you sure you want to delete`);
-    if (!confirm) return;
     const url = `http://localhost:5000/api/todos/${itemId}`;
     const token = localStorage.getItem("tkn");
     const obj = {
@@ -84,24 +80,18 @@ const TodoDetailPage = () => {
     );
   }
 
-  if (errorMessage || !user) {
+  if (errorMessage) {
     return (
-      <div>
-        <div className="d-flex justify-content-center border-1 mt-5 border-bottom">
-          <h2>Welcome, this is your todo app</h2>
+      <section>
+        <div>
+          <button className="btn btn-light m-3" onClick={handleGoBack}>
+            <BiArrowBack color={"#2c3e50"} size={35} />
+          </button>
         </div>
-        <div className="d-flex justify-content-center m-5">
-          <p>Please login or register to continue</p>
+        <div className="d-flex justify-content-center m-2">
+          <p>{errorMessage}</p>
         </div>
-        <div className="d-flex justify-content-center">
-          <a href="/login">
-            <button className="btn btn-primary mx-4">Login</button>
-          </a>
-          <a href="/register">
-            <button className="btn btn-dark mx-4">Register</button>
-          </a>
-        </div>
-      </div>
+      </section>
     );
   }
 

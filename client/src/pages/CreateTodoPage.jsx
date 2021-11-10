@@ -58,7 +58,14 @@ const CreateTodoPage = () => {
                 </div>
                 <div className="card-text my-5">
                   <div className="">
-                    <input placeholder="Title..." id="title" type="text" />
+                    <input
+                      placeholder="Title..."
+                      id="title"
+                      type="text"
+                      maxLength="40"
+                      minLength="2"
+                      required="required"
+                    />
                   </div>
                   <div className="my-5">
                     <textarea
@@ -67,6 +74,9 @@ const CreateTodoPage = () => {
                       className="rounded"
                       id="description"
                       type="text"
+                      maxLength="1024"
+                      minLength="2"
+                      required="required"
                     />
                   </div>
                 </div>
@@ -91,7 +101,7 @@ const CreateTodoPage = () => {
       <div className="d-flex justify-content-center border-1 mt-5 border-bottom">
         <h2>Welcome, this is your todo app</h2>
       </div>
-      <div className="d-flex justify-content-center m-5">
+      <div className="d-flex justify-content-center my-2">
         <p>Please login or register to continue</p>
       </div>
       <div className="d-flex justify-content-center">

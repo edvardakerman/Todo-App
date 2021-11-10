@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 const EditTodoPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState();
-  const [task, setTask] = useState({
+  const [todo, setTodo] = useState({
     title: "Todo",
     description: "Do this todo",
   });
@@ -36,7 +36,7 @@ const EditTodoPage = () => {
 
       responseData.data.todo.datePlaced = new Date();
 
-      setTask(responseData.data.todo);
+      setTodo(responseData.data.todo);
       setIsLoading(false);
     };
     fetchTodo().catch((error) => {
@@ -46,12 +46,12 @@ const EditTodoPage = () => {
   }, [todoId]);
 
   const getHandleChange = (key) => (event) => {
-    setTask({ ...task, [key]: event.target.value });
+    setTodo({ ...todo, [key]: event.target.value });
   };
 
   const handleUpdateTodo = async (event) => {
     event.preventDefault();
-    const url = `http://localhost:5000/api/todos/${task._id}`;
+    const url = `http://localhost:5000/api/todos/${todo._id}`;
     const token = localStorage.getItem("tkn");
     const obj = {
       headers: {
@@ -59,7 +59,7 @@ const EditTodoPage = () => {
         authorization: `Bearer ${token}`,
       },
       method: "POST",
-      body: JSON.stringify(task),
+      body: JSON.stringify(todo),
     };
     const response = await fetch(url, obj);
     if (!response.ok) {
@@ -83,23 +83,20 @@ const EditTodoPage = () => {
   if (errorMessage) {
     return (
       <section>
-        <button className="btn mx-3" onClick={handleCancel}>
-          <BiArrowBack color={"#2c3e50"} size={25} />
-        </button>
-        <div className="d-flex justify-content-center mt-5">
-          <p>{errorMessage}</p>
-        </div>
-        <div className="d-flex justify-content-center">
-          <button className="btn mx-3" onClick={handleCancel}>
-            <BiArrowBack color={"#2c3e50"} size={25} />
+        <div>
+          <button className="btn btn-light m-3" onClick={handleCancel}>
+            <BiArrowBack color={"#2c3e50"} size={35} />
           </button>
+        </div>
+        <div className="d-flex justify-content-center m-2">
+          <p>{errorMessage}</p>
         </div>
       </section>
     );
   }
 
-  if (task) {
-    const date = new Date(task.datePlaced);
+  if (todo) {
+    const date = new Date(todo.datePlaced);
     return (
       <section>
         <div>
@@ -121,22 +118,27 @@ const EditTodoPage = () => {
                 <div className="card-text my-5">
                   <div className="text-white mt-3">
                     <input
-                      className=""
+                      required="required"
                       onChange={getHandleChange("title")}
                       name="title"
-                      value={task.title}
+                      value={todo.title}
                       id="title"
                       type="text"
+                      maxLength="40"
+                      minLength="2"
                     />
                   </div>
                   <div className="mt-4 rounded">
                     <textarea
+                      required="required"
                       className="rounded mt-4"
                       onChange={getHandleChange("description")}
-                      value={task.description}
+                      value={todo.description}
                       name="description"
                       id="description"
                       type="text"
+                      maxLength="1024"
+                      minLength="2"
                     />
                   </div>
                 </div>

@@ -1,10 +1,9 @@
 import { React, useState, useEffect, useContext } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { FiDelete } from "react-icons/fi";
 import { AiTwotoneEdit } from "react-icons/ai";
 import { IoCheckmarkSharp } from "react-icons/io5";
+import { MdLibraryAdd } from "react-icons/md";
 import { UserContext } from "../contexts/UserContext";
-
 export default function TodoListPage() {
   const [todos, setTodos] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -41,8 +40,6 @@ export default function TodoListPage() {
   }, []);
 
   const handleDelete = (itemId) => async (event) => {
-    const confirm = window.confirm(`Are you sure you want to delete`);
-    if (!confirm) return;
     const url = `http://localhost:5000/api/todos/${itemId}`;
     const token = localStorage.getItem("tkn");
     const obj = {
@@ -79,15 +76,15 @@ export default function TodoListPage() {
         <div className="d-flex justify-content-center border-1 mt-5 border-bottom">
           <h2>Welcome, this is your todo app</h2>
         </div>
-        <div className="d-flex justify-content-center">
+        <div className="d-flex justify-content-center my-2">
           <p>Please login or register to continue</p>
         </div>
         <div className="d-flex justify-content-center">
           <a href="/login">
-            <button className="btn btn-primary mx-5">Login</button>
+            <button className="btn btn-primary mx-4">Login</button>
           </a>
           <a href="/register">
-            <button className="btn btn-dark mx-5">Register</button>
+            <button className="btn btn-dark mx-4">Register</button>
           </a>
         </div>
       </div>
@@ -125,18 +122,18 @@ export default function TodoListPage() {
 
                     <div>
                       <button
-                        className="btn mx-3"
+                        className="btn m-3"
                         onClick={handleDelete(todo._id)}
                       >
                         <IoCheckmarkSharp color={"white"} size={25} />
                       </button>
                       <a href={`/edit/${todo._id}`}>
-                        <button className="btn mx-3">
+                        <button className="btn m-3">
                           <AiTwotoneEdit color={"white"} size={25} />
                         </button>
                       </a>
                       <button
-                        className="btn mx-3"
+                        className="btn m-3"
                         onClick={handleDelete(todo._id)}
                       >
                         <FiDelete color={"white"} size={25} />
@@ -147,6 +144,13 @@ export default function TodoListPage() {
               </div>
             );
           })}
+        </div>
+        <div className="d-flex justify-content-center my-5">
+          <a className="" href="/create">
+            <button className="btn mx-5 my-3 btn-success text-center">
+              <MdLibraryAdd size={20} /> New Todo
+            </button>
+          </a>
         </div>
       </div>
     );

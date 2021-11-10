@@ -63,8 +63,9 @@ export default function Form({ type, title }) {
                   <div className="text-white mt-3 rounded">
                     <h5>Name</h5>
                     <input
+                      minLength="2"
                       placeholder="John Doe"
-                      className=""
+                      required="required"
                       onChange={(e) =>
                         handleChange(e.target.value, e.target.id)
                       }
@@ -76,7 +77,7 @@ export default function Form({ type, title }) {
                     <h5>Email</h5>
                     <input
                       placeholder="JohnDoe@mail.com"
-                      className=""
+                      required="required"
                       onChange={(e) =>
                         handleChange(e.target.value, e.target.id)
                       }
@@ -89,7 +90,7 @@ export default function Form({ type, title }) {
                     <h6>Password</h6>
                     <input
                       placeholder="********"
-                      className=""
+                      required="required"
                       onChange={(e) =>
                         handleChange(e.target.value, e.target.id)
                       }
@@ -102,7 +103,7 @@ export default function Form({ type, title }) {
                     <h6>Confirm Password</h6>
                     <input
                       placeholder="********"
-                      className=""
+                      required="required"
                       onChange={(e) =>
                         handleChange(e.target.value, e.target.id)
                       }
@@ -144,6 +145,7 @@ export default function Form({ type, title }) {
                   <div className="text-white my-5">
                     <h5>Email</h5>
                     <input
+                      required="required"
                       placeholder="johndoe@mail.com"
                       onChange={(e) =>
                         handleChange(e.target.value, e.target.id)
@@ -156,6 +158,7 @@ export default function Form({ type, title }) {
                   <div className="text-white my-5">
                     <h5>Password</h5>
                     <input
+                      required="required"
                       placeholder="********"
                       onChange={(e) =>
                         handleChange(e.target.value, e.target.id)
@@ -178,7 +181,9 @@ export default function Form({ type, title }) {
                     </button>
                   </Link>
                 </div>
-                {submitStatus && <p>{submitStatus.message}</p>}
+                {submitStatus && (
+                  <p className="text-white">{submitStatus.message}</p>
+                )}
               </form>
             </div>
           </div>
