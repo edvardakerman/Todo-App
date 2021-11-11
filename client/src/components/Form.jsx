@@ -171,7 +171,6 @@ export default function Form({ type, title }) {
                 </div>
 
                 <div className="my-2">
-                  {/* Byt ut nedantående mot Button components */}
                   <button className="btn btn-primary rounded my-2 mx-4">
                     Login
                   </button>
